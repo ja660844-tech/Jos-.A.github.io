@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escuela Tecnológica de Panamá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#2B2F36;--claro:#6B7280;--blanco:#fff;--gris:#F3F4F6;--oro:#C8A45C;--texto:#1F2937}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--gris);color:var(--texto);line-height:1.6}
+header{position:sticky;top:0;z-index:50;background:var(--verde);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.nav{max-width:1200px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.logo{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.logo span{color:var(--oro)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-size:.9rem;font-weight:500;padding:6px 12px;border-radius:20px;transition:.2s}
+nav a:hover{background:var(--claro);color:var(--oro)}
+.hero{background:linear-gradient(135deg,#2B2F36,#4B5563);color:#fff;text-align:center;padding:90px 20px}
+.hero h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.2;max-width:850px;margin:0 auto 16px}
+.hero h1 em{font-style:normal;color:var(--oro)}
+.hero p{max-width:640px;margin:0 auto 28px;opacity:.95}
+.btn{display:inline-block;background:var(--oro);color:#1d1d1d;font-weight:600;padding:14px 30px;border-radius:30px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;font-size:1rem;transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.btn:hover{transform:translateY(-2px);background:#ffbb1f}
+section{max-width:1200px;margin:auto;padding:60px 20px}
+h2{color:var(--verde);font-size:clamp(1.5rem,3.5vw,2.2rem);margin-bottom:8px}
+.sub{color:#6B7280;margin-bottom:32px}
+.bar{width:60px;height:4px;background:var(--oro);border-radius:4px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);display:flex;flex-direction:column;transition:.25s}
+.card:hover{box-shadow:0 10px 26px rgba(43,47,54,.18)}
+.thumb{position:relative;height:190px;overflow:hidden;cursor:pointer;border:0;padding:0;background:var(--claro);display:flex;width:100%;-webkit-tap-highlight-color:rgba(200,164,92,.4)}
+.thumb .mitad{flex:1;min-width:0;height:100%;overflow:hidden;display:block}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.ins{background:linear-gradient(#fff,#E5E7EB);border-left:3px solid var(--oro)}
+.thumb .ins img,.modal .ins img{object-fit:contain;padding:14px}
+.thumb:hover img,.thumb:focus-visible img{transform:scale(1.12)}
+.thumb:active img{transform:scale(1.04);filter:brightness(.85)}
+.thumb:hover{box-shadow:inset 0 0 0 4px var(--oro)}
+.thumb:focus-visible{outline:3px solid var(--oro)}
+.thumb .zoom{position:absolute;right:10px;bottom:10px;background:rgba(43,47,54,.9);color:#fff;font-size:.75rem;padding:4px 10px;border-radius:14px}
+.body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{align-self:flex-start;background:#E5E7EB;color:var(--verde);font-size:.75rem;font-weight:600;padding:3px 12px;border-radius:14px;border:1px solid var(--claro)}
+.body h3{font-size:1.02rem;color:var(--verde);line-height:1.3}
+.loc{font-size:.85rem;color:#6B7280}
+.hint{margin-top:auto;font-size:.8rem;color:var(--claro);font-weight:500;border-top:1px dashed #D1D5DB;padding-top:8px}
+.bach{background:#fff}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chip{background:var(--gris);border-left:5px solid var(--oro);padding:18px;border-radius:10px}
+.chip h4{color:var(--verde);margin-bottom:4px}.chip p{font-size:.9rem}
+footer{background:var(--verde);color:#fff;padding:40px 20px 20px}
+.fgrid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+footer h4{color:var(--oro);margin-bottom:8px}footer p,footer li{font-size:.9rem;opacity:.95}footer ul{list-style:none}
+.credits{max-width:1200px;margin:24px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.25);font-size:.8rem;text-align:center;opacity:.85}
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(17,24,39,.65);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(3px)}
+.overlay.open{opacity:1;visibility:visible}
+.modal{background:#fff;border-radius:18px;max-width:680px;width:100%;max-height:92vh;overflow-y:auto;position:relative;transform:translateY(30px) scale(.95);transition:.35s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.overlay.open .modal{transform:none}
+.modal .split{display:flex;height:260px;border-radius:18px 18px 0 0;overflow:hidden}
+.modal .split>div{flex:1;min-width:0}
+.modal .split img{width:100%;height:100%;object-fit:cover;display:block}
+.close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.95);color:var(--verde);font-size:1.7rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:.2s}
+.close:hover{background:var(--oro);transform:rotate(90deg)}
+.mbody{padding:24px}
+.mbody h3{color:var(--verde);font-size:1.4rem;line-height:1.25;margin:8px 0}
+.mbody h5{color:var(--claro);margin:18px 0 6px;font-size:1rem}
+.mbody ul{padding-left:20px}.mbody li{margin-bottom:3px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:6px}
+.meta div{background:var(--gris);border-radius:10px;padding:12px;font-size:.9rem}
+.meta b{display:block;color:var(--verde)}
+@media(max-width:600px){.nav{justify-content:center}.hero{padding:60px 16px}.modal .split{height:200px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="logo">🎓 Escuela <span>Tecnológica</span> de Panamá</div>
+    <nav>
+      <a href="#inicio">Inicio</a><a href="#escuelas">10 Escuelas</a><a href="#bachilleratos">Bachilleratos</a><a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="hero" id="inicio">
+  <h1>Formación técnica y <em>bachilleratos tecnológicos</em> en Panamá</h1>
+  <p>Descubre centros técnicos, industriales y de servicios que preparan a los jóvenes con habilidades prácticas para el trabajo, la tecnología y la educación superior.</p>
+  <a class="btn" href="#escuelas">Ver las 10 Escuelas</a>
+</div>
+
+<section id="escuelas">
+  <div class="bar"></div>
+  <h2>10 Escuelas Técnicas y Vocacionales</h2>
+  <p class="sub">Explora cada centro y conoce su oferta de bachilleratos tecnológicos.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<div class="bach" id="bachilleratos"><section>
+  <div class="bar"></div>
+  <h2>Áreas de Bachillerato</h2>
+  <p class="sub">Principales modalidades de la educación media técnica (3 años).</p>
+  <div class="chips">
+    <div class="chip"><h4>💻 Informática</h4><p>Programación, redes, bases de datos y soporte técnico.</p></div>
+    <div class="chip"><h4>⚡ Electrónica y Electricidad</h4><p>Circuitos, automatización e instalaciones eléctricas.</p></div>
+    <div class="chip"><h4>🔧 Mecánica y Autotrónica</h4><p>Mecánica industrial, automotriz y refrigeración.</p></div>
+    <div class="chip"><h4>📊 Comercio y Gestión</h4><p>Contabilidad, administración y secretariado.</p></div>
+  </div>
+</section></div>
+</main>
+
+<footer id="contacto">
+  <div class="fgrid">
+    <div><h4>Contacto de referencia</h4><ul><li>📍 Ciudad de Panamá, Panamá</li><li>✉️ contacto@escuelatecnologica.pa</li><li>📞 +507 6123-4567</li></ul></div>
+    <div><h4>Oferta tecnológica</h4><p>Informática, electrónica, mecánica, refrigeración, autotrónica, comercio, turismo y artes y oficios.</p></div>
+    <div><h4>Aviso</h4><p>Información de carácter referencial. Verifica la oferta vigente directamente con cada centro y el MEDUCA.</p></div>
+  </div>
+  <div class="credits">© 2026 Escuela Tecnológica de Panamá · Portal educativo · Ilustraciones originales</div>
+</footer>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitulo">
+    <button class="close" id="close" aria-label="Cerrar">&times;</button>
+    <div class="split"><div><img id="mImg" src="" alt=""></div><div class="ins"><img id="mIns" src="" alt=""></div></div>
+    <div class="mbody">
+      <span class="tag" id="mTag"></span>
+      <h3 id="mTitulo"></h3>
+      <p class="loc" id="mLoc"></p>
+      <h5>Descripción general</h5><p id="mDesc"></p>
+      <h5>Bachilleratos y áreas ofrecidas</h5><ul id="mLista"></ul>
+      <h5>Duración y perfil</h5>
+      <div class="meta"><div><b>Duración</b><span id="mDur"></span></div><div><b>Perfil del egresado</b><span id="mPerfil"></span></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== ILUSTRACIONES (SVG propias, editables) ===== */
+const G="#2B2F36",M="#6B7280",L="#9CA3AF",A="#C8A45C";
+const BG=`<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#F9FAFB'/><stop offset='1' stop-color='#CDD2D9'/></linearGradient></defs><rect width='900' height='500' fill='url(#g)'/><circle cx='790' cy='90' r='140' fill='#fff' opacity='.55'/><circle cx='90' cy='450' r='120' fill='#fff' opacity='.45'/>`;
+const escenas={
+ info:`<rect x='460' y='110' width='0' height='0'/><rect x='250' y='100' width='400' height='250' rx='14' fill='${G}'/><rect x='268' y='118' width='364' height='214' rx='6' fill='#374151'/><rect x='290' y='145' width='120' height='12' rx='6' fill='${A}'/><rect x='310' y='175' width='200' height='12' rx='6' fill='#fff' opacity='.8'/><rect x='310' y='205' width='150' height='12' rx='6' fill='${L}'/><rect x='290' y='235' width='180' height='12' rx='6' fill='#fff' opacity='.8'/><rect x='310' y='265' width='100' height='12' rx='6' fill='${A}'/><text x='560' y='300' font-size='46' font-family='monospace' fill='${A}' text-anchor='middle'>&lt;/&gt;</text><rect x='420' y='350' width='60' height='40' fill='${L}'/><rect x='330' y='388' width='240' height='16' rx='8' fill='${M}'/>`,
+ elec:`<g stroke='${M}' stroke-width='7' fill='none' stroke-linecap='round'><path d='M380 230H220V130H140'/><path d='M380 270H200V380H130'/><path d='M520 230H680V120H770'/><path d='M520 270H700V390H780'/><path d='M450 180V90H560'/><path d='M450 320V420H340'/></g><g fill='${A}'><circle cx='140' cy='130' r='13'/><circle cx='130' cy='380' r='13'/><circle cx='770' cy='120' r='13'/><circle cx='780' cy='390' r='13'/><circle cx='560' cy='90' r='13'/><circle cx='340' cy='420' r='13'/></g><rect x='380' y='180' width='140' height='140' rx='14' fill='${G}'/><rect x='405' y='205' width='90' height='90' rx='8' fill='#374151'/><path d='M455 215l-22 42h20l-8 32 30-46h-20z' fill='${A}'/>`,
+ mec:`<g transform='translate(450 250)'>${[0,1,2,3,4,5,6,7].map(k=>`<rect x='-20' y='-150' width='40' height='56' rx='6' fill='${G}' transform='rotate(${k*45})'/>`).join('')}<circle r='115' fill='${G}'/><circle r='52' fill='#E5E7EB'/><circle r='20' fill='${A}'/></g><g transform='translate(720 380) scale(.5)'>${[0,1,2,3,4,5].map(k=>`<rect x='-20' y='-150' width='40' height='56' rx='6' fill='${M}' transform='rotate(${k*60})'/>`).join('')}<circle r='115' fill='${M}'/><circle r='52' fill='#E5E7EB'/></g>`,
+ com:`<rect x='200' y='110' width='500' height='290' rx='14' fill='#fff' stroke='${L}' stroke-width='3'/><g fill='${G}'><rect x='250' y='290' width='60' height='80' rx='6'/><rect x='340' y='240' width='60' height='130' rx='6'/><rect x='430' y='200' width='60' height='170' rx='6'/><rect x='520' y='160' width='60' height='210' rx='6' fill='${A}'/></g><polyline points='280,260 370,215 460,185 550,135 640,120' fill='none' stroke='${M}' stroke-width='6' stroke-linecap='round'/><circle cx='640' cy='120' r='11' fill='${A}'/><rect x='620' y='320' width='60' height='50' rx='6' fill='${L}'/>`,
+ cons:`<rect x='320' y='110' width='260' height='290' fill='${G}'/><rect x='580' y='210' width='120' height='190' fill='${M}'/><rect x='200' y='270' width='120' height='130' fill='${L}'/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x='${345+c*75}' y='${135+r*65}' width='45' height='38' rx='4' fill='${(r+c)%3==0?A:'#E5E7EB'}'/>`).join('')).join('')}<rect x='170' y='400' width='560' height='14' rx='7' fill='#4B5563'/><rect x='610' y='235' width='60' height='36' rx='4' fill='#E5E7EB'/>`,
+ arte:`<g transform='translate(450 250) rotate(-35)'><rect x='-14' y='-150' width='28' height='290' rx='12' fill='${M}'/><rect x='-60' y='-170' width='120' height='54' rx='10' fill='${G}'/></g><g transform='translate(450 250) rotate(35)'><rect x='-12' y='-130' width='24' height='270' rx='10' fill='${L}'/><circle cx='0' cy='-140' r='48' fill='${G}'/><rect x='-14' y='-150' width='28' height='56' fill='#E5E7EB'/></g><circle cx='450' cy='250' r='20' fill='${A}'/>`
+};
+const ilus=t=>"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 500'>${BG}${escenas[t]}</svg>`);
+/* ===== INSIGNIAS: escudo con siglas (reemplazable por la insignia real con el campo "insignia") ===== */
+const escudo=sg=>"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240'><path d='M100 12L184 40V120C184 175 145 212 100 230C55 212 16 175 16 120V40Z' fill='${G}' stroke='${A}' stroke-width='6'/><path d='M100 28L170 51V120C170 166 138 197 100 214C62 197 30 166 30 120V51Z' fill='none' stroke='${L}' stroke-width='2'/><rect x='62' y='56' width='76' height='6' rx='3' fill='${A}'/><text x='100' y='132' font-size='${sg.length>4?30:sg.length>3?38:46}' font-weight='700' font-family='Poppins,Arial,sans-serif' fill='#fff' text-anchor='middle'>${sg}</text><path d='M70 160H130' stroke='${A}' stroke-width='3'/><text x='100' y='186' font-size='13' font-family='Arial,sans-serif' fill='${L}' text-anchor='middle' letter-spacing='3'>PANAMÁ</text></svg>`);
+const insig=e=>e.insignia||escudo(e.sigla);
+/* Fotos reales: coloca fotos/escuela-1.jpg ... escuela-10.jpg e insignias fotos/insignia-1.png ... insignia-10.png.
+   Si el archivo no existe, se muestra la ilustración / el escudo. Puedes forzar otra ruta con los campos foto / insignia. */
+const fotoSrc=(e,i)=>e.foto||`fotos/escuela-${i+1}.jpg`;
+const insSrc=(e,i)=>e.insignia||`fotos/insignia-${i+1}.png`;
+/* ===== DATOS EDITABLES: cambia textos; img = foto/ilustración (ilus('info'|'elec'|'mec'|'com'|'cons'|'arte') o URL propia); insignia = URL de la insignia real (opcional) ===== */
+const DURACION = "3 años (educación media)";
+const escuelas = [
+  {nombre:"Instituto Profesional y Técnico Don Bosco", ubicacion:"Ciudad de Panamá, Provincia de Panamá", enfoque:"Técnico Vocacional", sigla:"DB", img:ilus("mec"),
+   desc:"Centro de formación técnica con fuerte énfasis en talleres prácticos y valores de trabajo, orientado a oficios industriales.",
+   bach:["Bachiller Industrial en Mecánica","Bachiller Industrial en Electricidad","Bachiller en Soldadura y Metalmecánica"],
+   perfil:"Técnico capaz de operar y mantener equipos industriales."},
+  {nombre:"Instituto Técnico Don Bosco (ITDB)", ubicacion:"Provincia de Panamá (referencia)", enfoque:"Bachiller Industrial", sigla:"ITDB", img:ilus("elec"),
+   desc:"Institución técnica que combina formación académica y práctica de taller en áreas industriales y tecnológicas.",
+   bach:["Bachiller en Electrónica","Bachiller en Autotrónica","Bachiller en Refrigeración y Aire Acondicionado"],
+   perfil:"Egresado listo para el empleo técnico o estudios superiores."},
+  {nombre:"Instituto Nacional (Bachillerato en Tecnología / Ciencias)", ubicacion:"Ciudad de Panamá, Provincia de Panamá", enfoque:"Tecnología y Ciencias", sigla:"IN", img:ilus("info"),
+   desc:"Plantel histórico que ofrece opciones con componente tecnológico y científico para continuar en la universidad.",
+   bach:["Bachiller en Ciencias con énfasis tecnológico","Bachiller en Tecnología e Informática"],
+   perfil:"Estudiante con base científica y competencias digitales."},
+  {nombre:"Escuela Profesional Isabel Herrera Obaldía (IPHEO)", ubicacion:"Ciudad de Panamá, Provincia de Panamá", enfoque:"Comercio y Servicios", sigla:"IPHEO", img:ilus("com"),
+   desc:"Centro profesional enfocado en formación de servicios, comercio y gestión con apoyo de herramientas informáticas.",
+   bach:["Bachiller en Comercio","Bachiller en Contabilidad","Bachiller en Secretariado e Informática"],
+   perfil:"Técnico administrativo con dominio de ofimática y gestión."},
+  {nombre:"Instituto Superior Técnico / Centros IPT de Panamá", ubicacion:"Varias sedes, Provincia de Panamá", enfoque:"Técnico Industrial", sigla:"IPT", img:ilus("cons"),
+   desc:"Red de centros IPT que ofrece bachilleratos técnicos con talleres equipados para la industria y los servicios.",
+   bach:["Bachiller en Electrónica","Bachiller en Mecánica Automotriz","Bachiller en Dibujo y Construcción"],
+   perfil:"Joven con habilidades prácticas y mentalidad de proyecto."},
+  {nombre:"IPT Jeptha B. Duncan", ubicacion:"Ciudad de Panamá, Provincia de Panamá", enfoque:"Tecnología e Informática", sigla:"JBD", img:ilus("elec"),
+   desc:"Instituto profesional y técnico con laboratorios para tecnología, informática y áreas industriales.",
+   bach:["Bachiller en Informática","Bachiller en Electrónica","Bachiller en Electricidad"],
+   perfil:"Egresado con competencias en sistemas, redes y electrónica."},
+  {nombre:"IPT de Veraguas", ubicacion:"Santiago, Provincia de Veraguas", enfoque:"Bachiller Industrial", sigla:"IPT VER", img:ilus("mec"),
+   desc:"Centro técnico regional que forma mano de obra calificada para el desarrollo industrial y agropecuario del interior.",
+   bach:["Bachiller en Mecánica Industrial","Bachiller en Electricidad","Bachiller en Informática"],
+   perfil:"Técnico comprometido con el desarrollo de su región."},
+  {nombre:"IPT de Colón", ubicacion:"Ciudad de Colón, Provincia de Colón", enfoque:"Técnico Vocacional", sigla:"IPT COL", img:ilus("com"),
+   desc:"Instituto técnico vinculado a la actividad logística, portuaria y de servicios de la provincia.",
+   bach:["Bachiller en Comercio y Logística","Bachiller en Informática","Bachiller en Refrigeración"],
+   perfil:"Técnico preparado para el sector logístico y de servicios."},
+  {nombre:"Centro de Educación Básica General y Técnica (Bachillerato en Informática)", ubicacion:"Panamá Oeste (referencia)", enfoque:"Tecnología e Informática", sigla:"CEBG", img:ilus("info"),
+   desc:"Centro con orientación tecnológica donde se desarrollan competencias digitales, programación y soporte técnico.",
+   bach:["Bachiller en Informática","Bachiller en Tecnología Digital"],
+   perfil:"Joven con pensamiento lógico y habilidades de programación."},
+  {nombre:"Escuela de Artes y Oficios Melchor Lasso de la Vega", ubicacion:"Ciudad de Panamá, Provincia de Panamá", enfoque:"Técnico Vocacional", sigla:"MLV", img:ilus("arte"),
+   desc:"Escuela tradicional de formación vocacional en oficios, diseño y trabajo manual calificado.",
+   bach:["Bachiller en Artes Industriales","Bachiller en Carpintería y Ebanistería","Bachiller en Diseño y Construcción"],
+   perfil:"Artesano técnico con visión creativa y emprendedora."}
+];
+
+/* ===== LÓGICA ===== */
+const $ = id => document.getElementById(id);
+const FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500"><rect width="100%" height="100%" fill="#6B7280"/><text x="50%" y="50%" fill="#fff" font-size="40" text-anchor="middle" font-family="sans-serif">Escuela Técnica</text></svg>');
+const grid = $("grid");
+
+escuelas.forEach((e, i) => {
+  const c = document.createElement("article");
+  c.className = "card";
+  c.innerHTML = `
+    <button class="thumb" data-i="${i}" aria-label="Ver información de ${e.nombre}">
+      <span class="mitad"><img src="${fotoSrc(e,i)}" alt="${e.nombre}" loading="lazy"></span><span class="mitad ins"><img src="${insSrc(e,i)}" alt="Insignia de ${e.nombre}" loading="lazy"></span>
+      <span class="zoom">🔍 Ver más</span>
+    </button>
+    <div class="body">
+      <span class="tag">${e.enfoque}</span>
+      <h3>${e.nombre}</h3>
+      <p class="loc">📍 ${e.ubicacion}</p>
+      <p class="hint">👆 Toca o haz clic en la imagen para ver la información</p>
+    </div>`;
+  c.querySelectorAll("img").forEach(im => im.onerror = () => { im.onerror = () => { im.onerror = null; im.src = FALLBACK; }; im.src = im.closest(".ins") ? escudo(e.sigla) : e.img; });
+  grid.appendChild(c);
+});
+
+let lastFocus = null;
+function abrir(i) {
+  const e = escuelas[i];
+  $("mImg").src = fotoSrc(e,i); $("mImg").alt = e.nombre;
+  $("mImg").onerror = () => { $("mImg").onerror = () => { $("mImg").onerror = null; $("mImg").src = FALLBACK; }; $("mImg").src = e.img; };
+  $("mIns").src = insSrc(e,i); $("mIns").alt = "Insignia de " + e.nombre;
+  $("mIns").onerror = ev => { ev.target.onerror = null; ev.target.src = escudo(e.sigla); };
+  $("mTag").textContent = e.enfoque;
+  $("mTitulo").textContent = e.nombre;
+  $("mLoc").textContent = "📍 " + e.ubicacion;
+  $("mDesc").textContent = e.desc;
+  $("mLista").innerHTML = e.bach.map(b => `<li>${b}</li>`).join("");
+  $("mDur").textContent = DURACION;
+  $("mPerfil").textContent = e.perfil;
+  lastFocus = document.activeElement;
+  $("overlay").classList.add("open");
+  $("overlay").setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  $("close").focus();
+}
+function cerrar() {
+  $("overlay").classList.remove("open");
+  $("overlay").setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+/* El modal se abre SOLO desde la imagen */
+grid.addEventListener("click", ev => {
+  const t = ev.target.closest(".thumb");
+  if (t) abrir(+t.dataset.i);
+});
+$("close").onclick = cerrar;
+$("overlay").addEventListener("click", ev => { if (ev.target === $("overlay")) cerrar(); });
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") cerrar(); });
+</script>
+</body>
+</html>
